@@ -1,0 +1,113 @@
+<div class="d-flex flex-column align-items-center">
+  <div class="top-bar align-items-center justify-content-center">
+    <h1>Budget calculator app</h1>
+  </div>
+  <div
+    class="total-budget w-100 d-flex align-items-center justify-content-center flex-column"
+  >
+    <h2 [ngClass]="{'text-danger':result<(income/5)}">{{ result }}</h2>
+    <div *ngIf="result<(income/5) &&result>0" class="alret text-warning mt-3">Warning!!, Be careful,Your outcome is more than 80% of your income. </div>
+    <div *ngIf="result<(income/5) &&result==0 &&cartona!=null" class="alret text-danger mt-3">Warning!!, Your budget is empty now . </div>
+    <div *ngIf="result<0 " class="alret text-danger mt-3">  انت عبيط يسط !! هتتسجن قريب خد بالك</div>
+  </div>
+ <div *ngIf="isEdit==true" class="cover">
+  <div  class="edit box row ">
+    <h2 class="my-2  text-success fw-bolder">Edit</h2>
+    <form #myForm="ngForm" [formGroup]="budgetUpdateForm" (ngSubmit)="budgetSubmit(budgetUpdateForm)">
+      <input
+        [(ngModel)]="qua"
+        type="number"
+        formControlName="amount"
+        placeholder="Amount"
+        class="my-2 form-control-amount mx-2 col-md-3"
+      />
+      <input
+        [(ngModel)]="desc"
+        type="text"
+        formControlName="description"
+        placeholder="Description"
+        class="form-control-amount mx-2 col-md-4 mb-sm-2"
+      />
+      <button
+        [disabled]="budgetUpdateForm.invalid"
+
+        (click)="updateDone()"
+
+        type="submit"
+        class="btn mb-1 mx-2 col-md-3"
+      >
+        Update
+      </button>
+    </form>
+    <button class="close bg-dark text-light" (click)="updateStatus()" >
+      X
+    </button>
+  </div>
+ </div>
+  <div class="form-area w-50 my-3">
+    <div class="input-area row">
+      <div class="col-md-12 row">
+        <form [formGroup]="budgetForm" (ngSubmit)="budgetSubmit(budgetForm)">
+          <input
+            type="number"
+            formControlName="amount"
+            placeholder="Amount"
+            class="my-2 form-control-amount mx-2 col-md-3"
+          />
+          <input
+            type="text"
+            formControlName="description"
+            placeholder="Description"
+            class="form-control-amount  mx-2 col-md-5 mb-sm-3"
+          />
+          <button
+            [disabled]="budgetForm.invalid"
+            type="submit"
+            class="btn mb-1 mx-2 col-md-2"
+          >
+            Add
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="out-area w-50 row">
+    <div class="col-md-6">
+      <h2 class="my-2 text-success fw-bolder">Income</h2>
+      <ng-container *ngFor="let item of cartona; let i = index">
+        <div
+          *ngIf="item.amount > 0"
+          class="box box2 d-flex align-items-center justify-content-between"
+
+          (click)="update(i)"
+          (click)="updateStatus()"
+        >
+          <h3>{{ item.description }}</h3>
+          <div class="value value2 p-2">{{ item.amount }}</div>
+          <button class="close bg-dark text-light" (click)="deleteItem(i)">
+            X
+          </button>
+        </div>
+      </ng-container>
+    </div>
+    <div class="col-md-6">
+      <h2 class="my-2 lol fw-bolder">Outcome</h2>
+      <ng-container *ngFor="let item of cartona; let i = index">
+        <div
+          *ngIf="item.amount < 0"
+          class="box d-flex align-items-center justify-content-between"
+
+          (click)="update(i)"
+          (click)="updateStatus()"
+        >
+          <h3>{{ item.description }}</h3>
+          <div class="value p-2">{{ item.amount }}</div>
+          <button class="close bg-dark text-light" (click)="deleteItem(i)">
+            X
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
