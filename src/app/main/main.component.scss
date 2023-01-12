@@ -129,7 +129,11 @@
 }
 @media screen and (max-width:450px) {
   .edit{
+    max-width: 90%;
     width: auto;
+    button{
+      margin-top: 10px;
+    }
   }
   .close{
     top: 10px;
