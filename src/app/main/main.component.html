@@ -10,6 +10,8 @@
     <div *ngIf="result<(income/5) &&result==0 &&cartona!=null" class="alret text-danger mt-3">Warning!!, Your budget is empty now . </div>
     <div *ngIf="result<0 " class="alret text-danger mt-3">  انت عبيط يسط !! هتتسجن قريب خد بالك</div>
   </div>
+  <!-- start update form -->
+
  <div *ngIf="isEdit==true" class="cover">
   <div  class="edit box row ">
     <h2 class="my-2  text-success fw-bolder">Edit</h2>
@@ -44,15 +46,19 @@
     </button>
   </div>
  </div>
-  <div class="form-area w-50 my-3">
-    <div class="input-area row">
-      <div class="col-md-12 row">
+  <!-- end update form -->
+  <!-- start form -->
+
+  <div class="form-area  my-3 ">
+    <div class="input-area ">
+      <h3 class="my-2 ">Enter your input to start calc</h3>
+      <div class=" row standard-form">
         <form [formGroup]="budgetForm" (ngSubmit)="budgetSubmit(budgetForm)">
           <input
             type="number"
             formControlName="amount"
             placeholder="Amount"
-            class="my-2 form-control-amount mx-2 col-md-3"
+            class="my-2 form-control-amount mx-2 col-md-3 "
           />
           <input
             type="text"
@@ -71,6 +77,9 @@
       </div>
     </div>
   </div>
+  <!-- end form -->
+  <!-- start result -->
+
   <div class="out-area w-50 row">
     <div class="col-md-6">
       <h2 class="my-2 text-success fw-bolder">Income</h2>
@@ -109,5 +118,6 @@
       </ng-container>
     </div>
   </div>
+    <!-- end result -->
 </div>
 
